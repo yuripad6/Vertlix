@@ -1,0 +1,498 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>VELTRIX — Your Idea, Our Code</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    :root {
+      --bg: #0B0F14;
+      --bg-elevated: #111720;
+      --accent: #70B7FF;
+      --text: #E6EDF3;
+      --text-muted: #8B95A3;
+      --border: #1C2530;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+      overflow-x: hidden;
+    }
+
+    .container {
+      max-width: 1120px;
+      margin: 0 auto;
+      padding: 0 32px;
+    }
+
+    /* Header */
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: rgba(11, 15, 20, 0.85);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      height: 72px;
+      max-width: 1120px;
+      margin: 0 auto;
+      padding: 0 32px;
+    }
+
+    .logo {
+      font-size: 1.05rem;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      color: var(--text);
+      text-decoration: none;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 40px;
+      list-style: none;
+    }
+
+    .nav-links a {
+      color: var(--text-muted);
+      text-decoration: none;
+      font-size: 0.9rem;
+      font-weight: 400;
+      transition: color 0.2s ease;
+    }
+
+    .nav-links a:hover {
+      color: var(--text);
+    }
+
+    /* Hero */
+    .hero {
+      min-height: calc(100vh - 72px);
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      padding: 80px 32px;
+    }
+
+    .hero h1 {
+      font-size: clamp(3.5rem, 12vw, 8.5rem);
+      font-weight: 700;
+      letter-spacing: -0.03em;
+      line-height: 1;
+      margin-bottom: 28px;
+      color: var(--text);
+    }
+
+    .hero .slogan {
+      font-size: clamp(0.85rem, 1.6vw, 1rem);
+      font-weight: 300;
+      color: var(--text-muted);
+      letter-spacing: 0.28em;
+      text-transform: uppercase;
+      margin-bottom: 56px;
+    }
+
+    .hero-actions {
+      display: flex;
+      gap: 16px;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+
+    .btn {
+      display: inline-block;
+      padding: 14px 32px;
+      font-size: 0.9rem;
+      font-weight: 500;
+      font-family: inherit;
+      text-decoration: none;
+      letter-spacing: 0.02em;
+      border-radius: 4px;
+      transition: all 0.2s ease;
+      cursor: pointer;
+      border: 1px solid transparent;
+    }
+
+    .btn-primary {
+      background: var(--accent);
+      color: var(--bg);
+      border-color: var(--accent);
+    }
+
+    .btn-primary:hover {
+      background: transparent;
+      color: var(--accent);
+    }
+
+    .btn-secondary {
+      background: transparent;
+      color: var(--text);
+      border-color: var(--border);
+    }
+
+    .btn-secondary:hover {
+      border-color: var(--accent);
+      color: var(--accent);
+    }
+
+    /* Sections */
+    section {
+      padding: 120px 0;
+    }
+
+    .section-label {
+      font-size: 0.75rem;
+      font-weight: 500;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 20px;
+    }
+
+    .section-title {
+      font-size: clamp(1.8rem, 3.5vw, 2.5rem);
+      font-weight: 600;
+      letter-spacing: -0.02em;
+      line-height: 1.2;
+      margin-bottom: 24px;
+    }
+
+    .section-text {
+      font-size: 1.05rem;
+      font-weight: 300;
+      color: var(--text-muted);
+      max-width: 680px;
+      line-height: 1.75;
+    }
+
+    /* About */
+    .about {
+      border-top: 1px solid var(--border);
+    }
+
+    /* Projects */
+    .projects {
+      border-top: 1px solid var(--border);
+    }
+
+    .projects-header {
+      margin-bottom: 56px;
+    }
+
+    .projects-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 24px;
+    }
+
+    .project-card {
+      display: flex;
+      flex-direction: column;
+      padding: 36px 32px;
+      background: var(--bg-elevated);
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      transition: border-color 0.25s ease, transform 0.25s ease;
+    }
+
+    .project-card:hover {
+      border-color: var(--accent);
+      transform: translateY(-2px);
+    }
+
+    .project-card .category {
+      font-size: 0.72rem;
+      font-weight: 500;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      margin-bottom: 18px;
+    }
+
+    .project-card h3 {
+      font-size: 1.35rem;
+      font-weight: 600;
+      letter-spacing: -0.01em;
+      margin-bottom: 8px;
+      color: var(--text);
+    }
+
+    .project-card .subtitle {
+      font-size: 0.88rem;
+      font-weight: 400;
+      color: var(--accent);
+      margin-bottom: 20px;
+    }
+
+    .project-card p {
+      font-size: 0.95rem;
+      font-weight: 300;
+      color: var(--text-muted);
+      line-height: 1.7;
+      margin-bottom: 32px;
+      flex-grow: 1;
+    }
+
+    .project-card .more {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 0.88rem;
+      font-weight: 500;
+      color: var(--text);
+      text-decoration: none;
+      align-self: flex-start;
+      transition: color 0.2s ease;
+    }
+
+    .project-card .more::after {
+      content: '→';
+      transition: transform 0.2s ease;
+    }
+
+    .project-card .more:hover {
+      color: var(--accent);
+    }
+
+    .project-card .more:hover::after {
+      transform: translateX(4px);
+    }
+
+    /* Footer */
+    footer {
+      border-top: 1px solid var(--border);
+      padding: 48px 0;
+    }
+
+    .footer-inner {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 24px;
+    }
+
+    .footer-brand {
+      font-size: 0.9rem;
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      color: var(--text);
+    }
+
+    .footer-links {
+      display: flex;
+      gap: 32px;
+      list-style: none;
+      flex-wrap: wrap;
+    }
+
+    .footer-links a {
+      color: var(--text-muted);
+      text-decoration: none;
+      font-size: 0.88rem;
+      transition: color 0.2s ease;
+    }
+
+    .footer-links a:hover {
+      color: var(--accent);
+    }
+
+    .footer-copy {
+      font-size: 0.8rem;
+      font-weight: 300;
+      color: var(--text-muted);
+      opacity: 0.7;
+    }
+
+    /* Responsive */
+    @media (max-width: 768px) {
+      .container {
+        padding: 0 24px;
+      }
+
+      .nav {
+        height: 64px;
+        padding: 0 24px;
+      }
+
+      .nav-links {
+        gap: 24px;
+      }
+
+      .nav-links a {
+        font-size: 0.85rem;
+      }
+
+      .hero {
+        min-height: calc(100vh - 64px);
+        padding: 60px 24px;
+      }
+
+      .hero .slogan {
+        letter-spacing: 0.18em;
+        margin-bottom: 44px;
+      }
+
+      .hero-actions {
+        flex-direction: column;
+        width: 100%;
+        max-width: 320px;
+      }
+
+      .btn {
+        width: 100%;
+        text-align: center;
+      }
+
+      section {
+        padding: 80px 0;
+      }
+
+      .projects-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .project-card {
+        padding: 28px 24px;
+      }
+
+      .footer-inner {
+        flex-direction: column;
+        align-items: flex-start;
+        text-align: left;
+      }
+
+      .footer-links {
+        gap: 24px;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .nav-links {
+        display: none;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <nav class="nav">
+      <a href="#" class="logo">VELTRIX</a>
+      <ul class="nav-links">
+        <li><a href="#about">О нас</a></li>
+        <li><a href="#projects">Проекты</a></li>
+        <li><a href="#contact">Связаться</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <section class="hero">
+    <h1>VELTRIX</h1>
+    <p class="slogan">Your Idea, Our Code</p>
+    <div class="hero-actions">
+      <a href="#projects" class="btn btn-primary">Наши проекты</a>
+      <a href="#contact" class="btn btn-secondary">Связаться</a>
+    </div>
+  </section>
+
+  <section id="about" class="about">
+    <div class="container">
+      <p class="section-label">О компании</p>
+      <h2 class="section-title">О нас</h2>
+      <p class="section-text">
+        VELTRIX — инженерная команда, специализирующаяся на разработке программного
+        обеспечения, плагинов и веб-сервисов. Мы создаём продукты, ориентированные
+        на долгосрочную эксплуатацию, продуманную архитектуру и предсказуемое качество.
+        От первого прототипа до релиза и технической поддержки.
+      </p>
+    </div>
+  </section>
+
+  <section id="projects" class="projects">
+    <div class="container">
+      <div class="projects-header">
+        <p class="section-label">Портфолио</p>
+        <h2 class="section-title">Проекты</h2>
+      </div>
+
+      <div class="projects-grid">
+        <article class="project-card">
+          <div class="category">Featured</div>
+          <h3>SYNTRA</h3>
+          <div class="subtitle">Global Player Identity</div>
+          <p>
+            Единая система идентификации игроков для игровых платформ.
+            Бесшовная авторизация, кросс-платформенная синхронизация
+            и безопасное управление профилем.
+          </p>
+          <a href="#" class="more">Подробнее</a>
+        </article>
+
+        <article class="project-card">
+          <div class="category">Web Service</div>
+          <h3>NEXUS API</h3>
+          <div class="subtitle">Backend Infrastructure</div>
+          <p>
+            Высоконагруженная API-платформа для объединения сервисов
+            в единую экосистему с продуманной системой обработки запросов.
+          </p>
+          <a href="#" class="more">Подробнее</a>
+        </article>
+
+        <article class="project-card">
+          <div class="category">Plugin</div>
+          <h3>ORBIT SDK</h3>
+          <div class="subtitle">Developer Toolkit</div>
+          <p>
+            Набор инструментов и плагинов для быстрой интеграции внешних
+            сервисов в существующую инфраструктуру без переработки ядра.
+          </p>
+          <a href="#" class="more">Подробнее</a>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <footer id="contact">
+    <div class="container">
+      <div class="footer-inner">
+        <div class="footer-brand">VELTRIX</div>
+        <ul class="footer-links">
+          <li><a href="https://github.com/veltrix" target="_blank" rel="noopener">GitHub</a></li>
+          <li><a href="https://t.me/veltrix" target="_blank" rel="noopener">Telegram</a></li>
+          <li><a href="https://discord.gg/veltrix" target="_blank" rel="noopener">Discord</a></li>
+        </ul>
+        <div class="footer-copy">© 2025 VELTRIX</div>
+      </div>
+    </div>
+  </footer>
+
+</body>
+              </html>
